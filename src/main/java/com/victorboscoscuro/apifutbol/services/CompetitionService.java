@@ -16,9 +16,57 @@ public class CompetitionService {
         this.webClient = webClient;
     }
 
+    public Mono<String> getCompetitions() {
+        return webClient.get()
+                .uri("/competitions")
+                .retrieve()
+                .onStatus(HttpStatusCode::is4xxClientError, response -> {
+                    if (response.statusCode().equals(HttpStatus.FORBIDDEN)) {
+                        return Mono.error(new RuntimeException("Acceso denegado: Token inválido o sin permisos"));
+                    }
+                    return response.createException().flatMap(Mono::error);
+                })
+                .onStatus(HttpStatusCode::is5xxServerError, response ->
+                        Mono.error(new RuntimeException("Error en el servidor de la API externa"))
+                )
+                .bodyToMono(String.class);
+    }
+
     public Mono<String> getStandings(String competitionId) {
         return webClient.get()
                 .uri("/competitions/{competitionId}/standings", competitionId)
+                .retrieve()
+                .onStatus(HttpStatusCode::is4xxClientError, response -> {
+                    if (response.statusCode().equals(HttpStatus.FORBIDDEN)) {
+                        return Mono.error(new RuntimeException("Acceso denegado: Token inválido o sin permisos"));
+                    }
+                    return response.createException().flatMap(Mono::error);
+                })
+                .onStatus(HttpStatusCode::is5xxServerError, response ->
+                        Mono.error(new RuntimeException("Error en el servidor de la API externa"))
+                )
+                .bodyToMono(String.class);
+    }
+
+    public Mono<String> getTeams(String competitionId) {
+        return webClient.get()
+                .uri("/competitions/{competitionId}/teams", competitionId)
+                .retrieve()
+                .onStatus(HttpStatusCode::is4xxClientError, response -> {
+                    if (response.statusCode().equals(HttpStatus.FORBIDDEN)) {
+                        return Mono.error(new RuntimeException("Acceso denegado: Token inválido o sin permisos"));
+                    }
+                    return response.createException().flatMap(Mono::error);
+                })
+                .onStatus(HttpStatusCode::is5xxServerError, response ->
+                        Mono.error(new RuntimeException("Error en el servidor de la API externa"))
+                )
+                .bodyToMono(String.class);
+    }
+
+    public Mono<String> getScorers(String competitionId) {
+        return webClient.get()
+                .uri("/competitions/{competitionId}/scorers", competitionId)
                 .retrieve()
                 .onStatus(HttpStatusCode::is4xxClientError, response -> {
                     if (response.statusCode().equals(HttpStatus.FORBIDDEN)) {
