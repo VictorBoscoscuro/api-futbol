@@ -1,0 +1,201 @@
+{
+	"info": {
+		"_postman_id": "28b62217-f9b4-4394-b0a9-9e30f01de9d8",
+		"name": "api futbol local",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20126506"
+	},
+	"item": [
+		{
+			"name": "matches by date",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/matches?dateFrom=2025-04-01&dateTo=2025-04-02",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"matches"
+					],
+					"query": [
+						{
+							"key": "dateFrom",
+							"value": "2025-04-01"
+						},
+						{
+							"key": "dateTo",
+							"value": "2025-04-02"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "match",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/matches/499209",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"matches",
+						"499209"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "competitions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/competition",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"competition"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "competitions scorers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/competition/scorers/PL",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"competition",
+						"scorers",
+						"PL"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "competitions standings",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/competition/standings/PL",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"competition",
+						"standings",
+						"PL"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "competitions teams",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/competition/teams/PL",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"competition",
+						"teams",
+						"PL"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "player",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/player/8215",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"player",
+						"8215"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "team",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/team/108",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"team",
+						"108"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "teams",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/team?offset=0&limit=10",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"team"
+					],
+					"query": [
+						{
+							"key": "offset",
+							"value": "0"
+						},
+						{
+							"key": "limit",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
