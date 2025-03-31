@@ -36,17 +36,9 @@ api.token=${API_TOKEN}
 
 📌 Endpoints
 
-### GET /competition/{competitionId}
+### GET /competition
 
-Descripción: Obtiene información general de la competición
-
-Parámetros:
-
-competitionId (String): Id de la competición
-
-Respuesta:
-
-JSON... todo
+Descripción: Obtiene las competiciones disponibles para el usuario
 
 #
 
@@ -58,9 +50,25 @@ Parámetros:
 
 competitionId (String): Id de la competición
 
-Respuesta:
+#
 
-JSON... todo
+### GET /competition/teams/{competitionId}
+
+Descripción: Obtiene los equipos actuales de la competición
+
+Parámetros:
+
+competitionId (String): Id de la competición
+
+#
+
+### GET /competition/scorers/{competitionId}
+
+Descripción: Obtiene la tabla de goleadores de la competición
+
+Parámetros:
+
+competitionId (String): Id de la competición
 
 #
 
@@ -72,9 +80,6 @@ Parámetros:
 
 playerId (String): Id del jugador
 
-Respuesta:
-
-JSON... todo
 
 #
 
@@ -86,21 +91,40 @@ Parámetros:
 
 teamId (String): Id del equipo
 
-Respuesta:
+#
 
-JSON... todo
+### GET /team?limit={limit}&offset={offset}
+
+Descripción: Obtiene el listado de los equipos disponibles para el usuario
+
+Parámetros:
+
+limit (Integer): cantidad de equipos a obtener por petición
+offset (Integer): posición de inicio de la petición
 
 #
 
 ### GET /match/{matchId}
 
+Descripción: Obtiene información general de un partido
+
+Parámetros:
+
+matchId (String): Id del partido
+
 #
 
 ### GET /match?dateTo={dateTo}&dateFrom={dateFrom}
 
+Descripción: Obtiene el listado de partidos disponibles entre las fechas especificadas
+
+Parámetros:
+
+dateFrom (ISO Date): fecha de inicio de la petición
+dateTo (ISO Date): fecha de fin de la petición
+
 #
 
-### GET /match?dateTo={dateTo}
 
 🏁 Ejecución
 
