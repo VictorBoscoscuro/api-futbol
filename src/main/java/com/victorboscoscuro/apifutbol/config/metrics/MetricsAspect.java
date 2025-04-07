@@ -24,10 +24,8 @@ public class MetricsAspect {
     @Around("within(@org.springframework.web.bind.annotation.RestController *) || " +
             "within(@org.springframework.stereotype.Controller *)")
     public Object measureEndpoint(ProceedingJoinPoint joinPoint) throws Throwable {
-        // Obtiene el método HTTP (GET, POST, etc.)
         String httpMethod = getHttpMethod(joinPoint);
 
-        // Obtiene la ruta base (ej: "/users" en lugar de "/users/{id}")
         String basePath = getBasePath(joinPoint);
 
         // Incrementa el contador de llamadas
@@ -47,7 +45,6 @@ public class MetricsAspect {
         }
     }
 
-    // Extrae el método HTTP (GET, POST, etc.)
     private String getHttpMethod(ProceedingJoinPoint joinPoint) {
         return Arrays.stream(joinPoint.getTarget().getClass().getMethods())
                 .filter(method -> method.getName().equals(joinPoint.getSignature().getName()))

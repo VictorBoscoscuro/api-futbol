@@ -99,7 +99,7 @@ Descripción: Obtiene el listado de los equipos disponibles para el usuario
 
 Parámetros:
 
-limit (Integer): cantidad de equipos a obtener por petición
+limit (Integer): cantidad de equipos a obtener por petición  
 offset (Integer): posición de inicio de la petición
 
 #
@@ -121,6 +121,7 @@ Descripción: Obtiene el listado de partidos disponibles entre las fechas especi
 Parámetros:
 
 dateFrom (ISO Date): fecha de inicio de la petición
+
 dateTo (ISO Date): fecha de fin de la petición
 
 #
@@ -132,6 +133,8 @@ Para ejecutar la aplicación:
 
 mvn spring-boot:run
 
-📊 Integración con Grafana
+📊 Integración con Prometheus y Grafana
 
-*todo*
+La aplicación exporta, mediante Actuator, las métricas de prometheus. Para visualizarlas, se puede acceder a  
+http://localhost:8080/actuator/prometheus en localhost. Adicionalmente, se puede acceder a la interfaz de Grafana en:  
+http://localhost:3000
