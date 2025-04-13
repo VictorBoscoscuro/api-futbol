@@ -8,6 +8,8 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -34,14 +36,25 @@ public class MetricsAspect {
                 .register(meterRegistry)
                 .increment();
 
-        // Mide el tiempo de ejecución
         Timer.Sample sample = Timer.start(meterRegistry);
-        try {
-            return joinPoint.proceed(); // Ejecuta el endpoint
-        } finally {
+        Object result = joinPoint.proceed();
+
+        if (result instanceof Mono<?> mono) {
+            return mono.doFinally(signalType ->
+                    sample.stop(Timer.builder("endpoint.latency")
+                            .tags("method", httpMethod, "path", basePath)
+                            .register(meterRegistry)));
+        } else if (result instanceof Flux<?> flux) {
+            return flux.doFinally(signalType ->
+                    sample.stop(Timer.builder("endpoint.latency")
+                            .tags("method", httpMethod, "path", basePath)
+                            .register(meterRegistry)));
+        } else {
+            // fallback para controlador no reactivo
             sample.stop(Timer.builder("endpoint.latency")
                     .tags("method", httpMethod, "path", basePath)
                     .register(meterRegistry));
+            return result;
         }
     }
 
